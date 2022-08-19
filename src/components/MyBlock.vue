@@ -41,4 +41,9 @@ div:hover{
 img{
   width: 150px;
 }
+p{
+    font-weight: bold;
+    font-size:25px;
+    color:rgb(245, 240, 240);
+}
 </style>

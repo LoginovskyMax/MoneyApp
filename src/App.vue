@@ -24,9 +24,9 @@ export default {
   data(){
     return{
       BuysArr:[],
-      categoryArr:[{category:"Техника",img:'./assets/tech.svg'},{category:"Одежда",img:'./assets/cloth.svg'},{category:"Еда",img:'./assets/food.svg'},{category:"Машина",img:'./assets/auto.svg'},{category:"Здоровье",img:'./assets/health.svg'}],
+      categoryArr:[{category:"Техника",img:'./assets/tech.svg',status:false},{category:"Одежда",img:'./assets/cloth.svg',status:false},{category:"Еда",img:'./assets/food.svg',status:false},{category:"Машина",img:'./assets/auto.svg',status:false},{category:"Здоровье",img:'./assets/health.svg',status:false}],
       SalarysArr:[],
-      categorySalaryArr:[{category:"Депозит",img:'./assets/depo.svg'},{category:"Зарплата",img:'./assets/cash.svg'},{category:"Сбережения",img:'./assets/sber.svg'}],
+      categorySalaryArr:[{category:"Депозит",img:'./assets/depo.svg',status:false},{category:"Зарплата",img:'./assets/cash.svg',status:false},{category:"Сбережения",img:'./assets/sber.svg',status:false}],
     }
   },
   methods:{
@@ -90,7 +90,7 @@ body{
   color: #2c3e50;
   padding: 15px;
   background: linear-gradient(white,purple);
-  height: 100Vh;
+  padding-bottom: 500px;
 }
 
 nav {
@@ -106,5 +106,8 @@ nav {
       color: #42b983;
     }
   }
+}
+@media screen and (max-width:768px) {
+
 }
 </style>

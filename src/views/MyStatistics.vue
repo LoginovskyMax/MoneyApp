@@ -24,38 +24,46 @@
            <option value="all">Показать все</option>
     </select>
   </div>
-  <button @click="salary" class="salary btn">Доходы</button>
-  <button @click="buysFunc" class="buys btn">Расходы</button>
-  <div class="salary">Всего потрачено :{{allBuys}}$</div>
-  <div class="buys">Всего прибыли :{{allSalary}}$</div>
+  <div class="btns">
+      <button @click="salary" class="salary btn">Доходы</button>
+      <button @click="buysFunc" class="buys btn">Расходы</button>
+  </div>
+   <div class="all">
+       <div class="salary">Всего потрачено :{{allBuys}}$</div>
+       <div class="buys">Всего прибыли :{{allSalary}}$</div>
+   </div>
+ 
   <input type="text" v-model="search" placeholder="Поиск..." class="search">
 </header>
+ <h2 v-if="buys">Расходы</h2>
+ <h2 v-else>Доходы</h2>
 <div class="main">
    <transition-group name="list" v-if="buys" appear>
+  
+  <div class="blocks block--last" key="1"><p class="bold">Всего потрачено: </p><p>{{totalSum}}$</p></div>
    <div v-for="item in newArr " 
        class="blocks"
        :key="item.id"
         >
-    <p>Категория: {{item.category}}</p>
-    <p>Сумма: {{item.sum}}</p>
-    <p>Дата: {{item.date}}</p>
-    <p v-if="item.from!=''">Источник: {{item.from}}</p>
-    <p v-if="item.comment!=''">Комментарий: {{item.comment}}</p>
+    <p><span class="bold">Категория:</span> {{item.category}}</p>
+    <p><span class="bold">Сумма: </span>{{item.sum}}$</p>
+    <p><span class="bold">Дата: </span>{{item.date}}</p>
+    <p v-if="item.comment!=''"><span class="bold">Комментарий: </span>{{item.comment}}</p>
     <DeleteBtn @click="deleteBuy(item.id)"></DeleteBtn>
   </div>
-  <div class="blocks block--last" key="1"><p>Всего потрачено: </p><p>{{totalSum}}</p></div>
   </transition-group>
+  
 <transition-group name="list" v-else appear>
+  <div class="blocks block--last" key="1"><p class="bold">Общая прибыль: </p><p>{{totalSumSalary}}$</p></div>
   <div v-for="item in salArr " 
        class="blocks"
        :key="item.id">
-    <p>Категория: {{item.category}}</p>
-    <p>Сумма: {{item.sum}}</p>
-    <p>Дата: {{item.date}}</p>
-    <p v-if="item.comment!=''">Комментарий: {{item.comment}}</p>
+    <p><span class="bold">Категория: </span>{{item.category}}</p>
+    <p><span class="bold">Сумма: </span>{{item.sum}}$</p>
+    <p><span class="bold">Дата:</span> {{item.date}}</p>
+    <p v-if="item.comment!=''"><span class="bold">Комментарий:</span> {{item.comment}}</p>
     <DeleteBtn @click="deleteSalary(item.id)"></DeleteBtn>
   </div>
-  <div class="blocks block--last" key="1"><p>Общая прибыль: </p><p>{{totalSumSalary}}</p></div>
   </transition-group>
 
 </div>
@@ -73,7 +81,7 @@ export default {
         search:'',
         arr:[],
         sort:'Cортировать по:',
-        sortByCategory:'Cортировать по:',
+        sortByCategory:'По категории:',
         salArr:[],
         buys:true
     }
@@ -178,7 +186,13 @@ width: 200px;
 transition: 0.7s;
 background-color: rgba(0, 128, 128, 0.089);
 position:relative;
-
+color:rgb(248, 244, 244);
+font-size:22px;
+  .bold{
+    font-weight: bold;
+    font-size:25px;
+    color:rgb(245, 240, 240);
+  }
 }
 .blocks:hover{
     transform: scale(1.1);
@@ -197,16 +211,22 @@ position:relative;
   transition: transform 0.7s ease;
 }
 header{
-padding: 10px;
+padding: 20px;
 display: flex;
 gap: 30px;
 justify-content: center;
 align-items:center;
-background-color: rgba(0, 255, 255, 0.548);
+background-color: rgba(173, 98, 226, 0.548);
+border-radius: 30px;
 margin-bottom: 20px;
+    .btns{
+     display: flex;
+     gap: 20px;
+      }
     .search{
         padding: 5px;
         border-radius:5px;
+        background-color: rgb(224, 199, 240);
       }
     .select{
       display: flex;
@@ -218,12 +238,14 @@ margin-bottom: 20px;
       padding: 5px;
       border-radius: 5px;
       color:white;
+      margin: 5px;
     }
     .buys{
        background-color: rgba(255, 0, 0, 0.466);
        padding: 5px;
        border-radius: 5px;
        color:white;
+       margin: 5px;
     }
     .btn{
       padding: 5px 15px;
@@ -231,7 +253,23 @@ margin-bottom: 20px;
     }
     .btn:hover,.btn:hover{
       color:gold;
+      box-shadow: 0 0 15px 3px black;
     }
+}
+@media screen and (max-width:768px) {
+  header{
+    flex-direction: column;
+    gap: 10px;
+  }
+  .main{
+    justify-content: center;
+  }
+  .blocks{
+    width: 100px;
+  }
+  option{
+    background-color: rgb(224, 199, 240);;
+  }
 }
 
 </style>

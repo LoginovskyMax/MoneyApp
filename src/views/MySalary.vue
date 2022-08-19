@@ -7,7 +7,7 @@
               :key="item.category" 
               :item="item" 
               @ChooseCathegory="ChooseCathegory">
-              <DeleteBtn @click="this.$emit('deleteCatSalary',item.category)"></DeleteBtn>
+              <DeleteBtn v-if="item.status" @click="this.$emit('deleteCatSalary',item.category)"></DeleteBtn>
               </MyBlock>
     <button @click="show2.show=true" class="button"><img src="../assets/plus.svg" alt="img" class="img-btn--big"><p>Добавить категорию</p></button>
     </div>
@@ -21,11 +21,11 @@
     </ModalWindow>
 <ModalWindow :show="show">
  <div class="inputs_block">
-      <p>Cумма</p>
+      <p class="text">Cумма</p>
       <input type="text" ref="sum" placeholder="Сумма" v-model="sumCath">
-      <p>Дата</p>
+      <p class="text">Дата</p>
       <input type="date"  v-model="dateCathegory">
-      <p>Комментарий</p>
+      <p class="text">Комментарий</p>
       <input type="text" placeholder="Комментарий" v-model="commentCathegory">
       <button @click="AddToMain(cathegory)"><img src="../assets/plus.svg" alt="img" class="img-btn"><p>Добавить доход</p></button>
     </div>
@@ -63,7 +63,8 @@ export default {
         this.show2.show=false;
         let obj ={
         img:'./assets/other.svg',
-        category:this.newCategory
+        category:this.newCategory,
+        status:true
       };
       this.$emit("addCategorySalary",obj);
       this.newCategory="";
@@ -120,6 +121,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.text{
+  font-size:25px;
+  font-weight:bold;
+}
 .home{
    input{
     padding: 9px;
@@ -163,5 +168,10 @@ gap:10px;
 .img-btn{width: 50px;}
 }
 .img-btn--big{width: 150px;}
+@media screen and (max-width:768px) {
+  .my-block{
+    justify-content: center;
+  }
+}
 </style>
 

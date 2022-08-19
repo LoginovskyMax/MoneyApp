@@ -1,5 +1,4 @@
 <template>
- <!-- <button @click="openModal" class="btn">{{TextBtn}}</button> -->
     <transition name="fade">
     <div class="modalWindow" v-if="show.show"  v-on:click.stop="closeModal">
       <div class="modalItem" @click.stop>
@@ -43,7 +42,7 @@ this.obj=this.show
   bottom:0;
   right:0;
   left:0;
-  background-color: rgba(0, 255, 255, 0.356);
+  background-color: #42b9837a;;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +52,7 @@ this.obj=this.show
   border-radius: 20px;
   border: 2px solid black;
   padding: 30px;
-  background-color: aqua;
+  background-color: #54b98c;
   position: relative;
 }
 .btn{
